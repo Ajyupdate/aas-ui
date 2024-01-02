@@ -18,6 +18,7 @@ import {
   VStack,
   useColorModeValue,
   useDisclosure,
+  Link
 } from "@chakra-ui/react";
 
 import Image from "next/image";
@@ -64,16 +65,25 @@ const Header: React.FC = () => {
         >
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Heading fontWeight={{ base: 700, md: 700 }} fontSize={"24px"}>
+              <Link 
+               _hover={{
+                
+                textDecoration: "none"
+              }}
+              textDecoration={'none'} href="/">
+               <Heading fontWeight={{ base: 700, md: 700 }} fontSize={"24px"}>
                 AAS
 
               </Heading>
+              </Link>
             </Box>
             <Box  display={{ md: "block", base: "none" }}>
-              Help
+              <Link>Help</Link>
             </Box>
             <Box  display={{ md: "block", base: "none" }}>
-              Need help?
+             <Link href="/need-help">
+             Need Help?
+             </Link>
             </Box>
 
             
