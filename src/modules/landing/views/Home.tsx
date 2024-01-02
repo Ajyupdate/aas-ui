@@ -2,7 +2,35 @@ import { Box, Grid, Heading, Input, InputGroup, InputLeftElement, Stack, Tab, Ta
 import Header from "../components/Navbar";
 import { SearchIcon } from "@chakra-ui/icons";
 import NeedHelp from "../components/NeedHelp";
+import { useState, useEffect } from "react";
+import { iPostsProps } from "@/types/Posts";
+import axios from "axios";
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL
 export default function LandingPage(){
+    const [posts, setPosts] = useState<iPostsProps[]>([])
+    const [error, setError] = useState(null);
+    const [savedPostLength, setSavedPostLength] = useState()
+
+    
+
+    useEffect(() => {
+        
+        const fetchPosts = async () => {
+          try {
+            const response = await axios.get(`${API_ENDPOINT}/posts`); 
+            console.log(response.data)
+            setPosts(response.data);
+        
+            console.log(savedPostLength)
+          } catch (error) {
+            // setError(error.message);
+          }
+        };
+    
+        fetchPosts();
+      }, []); // 
+
+ 
     return(
         <Box>
             <Header/>
@@ -25,15 +53,19 @@ export default function LandingPage(){
                             <TabList>
                                 <Tab>Need Help</Tab>
                                 <Tab>Helped</Tab>
+                                <Tab>Saved</Tab>
                                 
                             </TabList>
 
                             <TabPanels>
                                 <TabPanel>
-                                <NeedHelp/>
+                                    <NeedHelp posts={posts} />
                                 </TabPanel>
                                 <TabPanel>
                                 <p>two!</p>
+                                </TabPanel>
+                                <TabPanel>
+                                <p>Saved</p>
                                 </TabPanel>
                                 
                             </TabPanels>
