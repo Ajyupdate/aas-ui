@@ -1,15 +1,19 @@
-export interface iPostsProps extends Partial<Student> {
-  post_id?: string;
+export interface iSchoolInfoProps {
   student_id: string;
-  title: string;
-  content: string;
-  createdAt?: Date;
-  last_updated?: Date;
-  is_published?: boolean;
-  category: string;
-  attachment_url: string;
-  updatedAt?: Date;
-  student?: Student;
+  matric_no: string;
+  first_name: string;
+  last_name: string;
+  createdAt: null;
+  updatedAt: null;
+  school: string;
+  outstanding_fee: OutstandingFee;
+  student: Student;
+}
+
+export interface OutstandingFee {
+  bills_title: string;
+  session: string;
+  amount: string;
 }
 
 export interface Student {
@@ -27,6 +31,8 @@ export interface Student {
   faculty: string;
   department: string;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt: Date;
+  saved_posts: null;
   school: string;
+  matric_no: string;
 }

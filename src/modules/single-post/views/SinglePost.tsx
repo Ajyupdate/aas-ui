@@ -1,25 +1,49 @@
 import { formatTimeAgo } from "@/components/formatTimeAgo";
 import Header from "@/modules/landing/components/Navbar";
 import { iPostsProps } from "@/types/Posts";
+import { iSchoolInfoProps } from "@/types/SchoolInfo";
 import {
   Box,
   Button,
+  Card,
+  CardBody,
   Divider,
   Flex,
   Heading,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
   Stack,
   Tag,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useState } from "react";
+
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
+
 export default function PostDetails() {
-  const [post, setPost] = useState<iPostsProps>([]);
+  const [post, setPost] = useState<iPostsProps | null>(null);
+  const [bills, setBills] = useState<iSchoolInfoProps>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [amount, setAmount] = useState("");
   const slugParams = useParams();
+  const router = useRouter();
   //   console.log(slugParams.id);
 
+  const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmount(e.target.value);
+  };
+  const handleAmountSubmit = () => {
+    console.log(amount);
+    router.push(`/paystack?amount=${amount}`);
+  };
   useEffect(() => {
     const fetchSinglePost = async () => {
       try {
@@ -27,50 +51,149 @@ export default function PostDetails() {
           `${API_ENDPOINT}/posts/${slugParams.id}`
         );
 
-        console.log(response.data);
         setPost(response.data);
       } catch (error) {}
     };
     fetchSinglePost();
   }, [slugParams.id]);
+
+  useEffect(() => {
+    const fetchBills = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/school-info/a6eb6521-28fb-496c-8a25-56a5be1af5ef`
+        );
+        setBills(response.data);
+        console.log(response.data);
+      } catch (error) {}
+    };
+    fetchBills();
+  }, [slugParams.id]);
   return (
     <Box>
       <Header />
 
-      <Flex mt={8} height="100vh" ml={{ md: 24 }} mr={4}>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          {/* <ModalHeader>Modal Title</ModalHeader> */}
+          <ModalCloseButton />
+          <ModalBody>
+            <Heading fontSize={"x-small"} as={"h6"}>
+              You are about to help {post?.first_name} with part/full of her
+              outstanding school fees
+            </Heading>
+
+            <Box mt={8}>
+              <Flex justify={"space-between"}>
+                <Box>
+                  session: <br />
+                  {bills?.outstanding_fee.bills_title}
+                </Box>
+
+                <Box>
+                  <Text>Amount You want to help with in Naira:</Text>
+                  <Input
+                    onChange={(e) => handleAmountChange(e)}
+                    size="sm"
+                    type="number"
+                  />
+                </Box>
+              </Flex>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              w={1000}
+              size={"sm"}
+              colorScheme="teal"
+              mr={3}
+              onClick={onClose}
+            >
+              Close
+            </Button>
+            <Button
+              onClick={handleAmountSubmit}
+              w={1000}
+              size={"sm"}
+              variant="outline"
+            >
+              Pay now
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Flex
+        flexDirection={{ md: "row", base: "column" }}
+        mt={8}
+        height="100vh"
+        ml={{ md: 24 }}
+        mr={4}
+      >
         <Box width="70%">
           <Stack spacing={4}>
-            <Heading fontSize={"x-large"}>{post.title}</Heading>
+            <Heading fontSize={"x-large"}>{post?.title}</Heading>
             <Heading mb={4} color={"gray"} as="h6" fontSize={"15px"}>
-              Posted {post && formatTimeAgo(post.createdAt)}
+              Posted{" "}
+              {post?.createdAt === undefined
+                ? ""
+                : formatTimeAgo(post?.createdAt)}
             </Heading>
           </Stack>
 
           <Divider my="2" />
-          <Text fontSize="xl">{post.content}</Text>
+          <Text fontSize="xl">{post?.content}</Text>
+          <Divider my={2} />
+
+          <Box mx={8}>
+            <Stack onClick={onOpen} my={8}>
+              <Card
+                variant="outline"
+                _hover={{
+                  border: "1px solid teal",
+                  boxShadow: "md",
+                  transform: "scale(1.09)",
+                  // transform: "translateY(-24px)",
+                  transition: "0.3s",
+                }}
+              >
+                <CardBody>
+                  <Heading size="md">
+                    {bills?.outstanding_fee.bills_title}
+                  </Heading>
+                  <Text py="2">{bills?.outstanding_fee.session}</Text>
+                </CardBody>
+
+                <Flex justify={"space-between"} mx={6}>
+                  <Text>{bills?.outstanding_fee.amount}</Text>
+                  <Text ml={8}>Pay</Text>
+                </Flex>
+              </Card>
+            </Stack>
+          </Box>
+
           <Divider my="2" />
-          {/* <Text fontSize="xl">
-            <Flex>
-              <Tag>Faculty of {post.student?.faculty}</Tag>
-              <Tag ml={4}>Department of {post.student?.department}</Tag>
-              <Tag ml={4}>{post.category}</Tag>
-            </Flex>
-          </Text>
-          <Divider my={2} /> */}
-          <Heading>About Student</Heading>
-          <Text>
-            Student at {post.student?.school}, first class CGPA. Needs the sum
-            of 20000 naira to pay school fees. 10000 minimum to register course
-            . balance needed to write exam
-            <Flex>
-              <Tag>Faculty of {post.student?.faculty}</Tag>
-              <Tag ml={4}>Department of {post.student?.department}</Tag>
-              <Tag ml={4}>{post.category}</Tag>
-            </Flex>
-          </Text>
+
+          <Box mx={4}>
+            <Heading>About Student</Heading>
+            <Text>
+              Student at {post?.student?.school}, first class CGPA. Needs the
+              sum of 20000 naira to pay school fees. 10000 minimum to register
+              course . balance needed to write exam
+            </Text>
+
+            <Box height={"20vh"}>
+              <Flex>
+                <Tag>Faculty of {post?.student?.faculty}</Tag>
+                <Tag ml={4}>Department of {post?.student?.department}</Tag>
+                <Tag ml={4}>{post?.category}</Tag>
+              </Flex>
+            </Box>
+          </Box>
         </Box>
 
-        <Box width="1" bg="#ccc" height="100%" />
+        <Box width="0.5" bg="#ccc" height="100%" />
 
         {/* Right Section (30%) */}
         <Box width="30%" padding="4">
