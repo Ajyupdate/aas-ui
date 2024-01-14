@@ -1,9 +1,10 @@
+import { Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
-import { Cormorant_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./provider";
 
-const inter = Cormorant_Garamond({ subsets: ["latin"], weight: "500" });
+const inter = Inter({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Box bg={"gray.200"}>{children}</Box>
+        </Providers>
       </body>
     </html>
   );

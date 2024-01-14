@@ -9,6 +9,7 @@ import {
   Heading,
   Input,
   Select,
+  Spinner,
   Stack,
   Textarea,
   VStack,
@@ -18,6 +19,7 @@ import {
 import axios from "axios";
 import { ErrorMessage, Field, FieldProps, Form, Formik } from "formik";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import NeedHelpImage from "../../../../public/need-help.jpg";
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
@@ -43,8 +45,12 @@ const initialValues: iPostsProps = {
 };
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required"),
-  content: Yup.string().required("content are required"),
+  title: Yup.string()
+    .required("Title is required")
+    .max(60, "Title must be at most 60 characters"),
+  content: Yup.string()
+    .min(50, "Content must be at least 50 characters")
+    .required("content are required"),
   school: Yup.string().required("School is required"),
   faculty: Yup.string().required("Faculty is required"),
   department: Yup.string().required("Department is required"),
@@ -54,7 +60,7 @@ const validationSchema = Yup.object().shape({
 
 export default function NeedHelp() {
   const toast = useToast();
-
+  const router = useRouter();
   const handleSubmit = (values: iPostsProps) => {
     console.log(values);
     const postFormValues = {
@@ -74,9 +80,10 @@ export default function NeedHelp() {
           title: "Success.",
           description: "Post added successfully.",
           status: "success",
-          duration: 900,
+          duration: 1400,
           isClosable: true,
         });
+        router.push("/");
       })
       .catch((error) => {
         // setLoading(false);
@@ -150,184 +157,201 @@ export default function NeedHelp() {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
               >
-                <Form className="w-full ">
-                  <VStack spacing={{ md: 2, base: 8 }} align="flex-start">
-                    <Field name="title">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          isInvalid={
-                            !!(form.errors.title && form.touched.title)
-                          }
-                        >
-                          <FormLabel htmlFor="title">Title</FormLabel>
-                          <Input
-                            variant={"filled"}
-                            {...field}
-                            id="title"
-                            placeholder="Enter title"
-                          />
-
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="title" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    <Field name="content">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(form.errors.content && form.touched.content)
-                          }
-                        >
-                          <FormLabel htmlFor="content">content</FormLabel>
-                          <Textarea
-                            variant={"filled"}
-                            {...field}
-                            id="content"
-                            placeholder="Enter content"
-                          />
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="content" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    <Field name="school">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(form.errors.school && form.touched.school)
-                          }
-                        >
-                          <FormLabel htmlFor="school">School</FormLabel>
-                          <Input
-                            variant={"filled"}
-                            {...field}
-                            id="school"
-                            placeholder="Enter school"
-                          />
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="school" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    <Field name="faculty">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(form.errors.faculty && form.touched.faculty)
-                          }
-                        >
-                          <FormLabel htmlFor="faculty">Faculty</FormLabel>
-                          <Input
-                            variant={"filled"}
-                            {...field}
-                            id="faculty"
-                            placeholder="Enter faculty"
-                          />
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="faculty" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    <Field name="department">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(
-                              form.errors.department && form.touched.department
-                            )
-                          }
-                        >
-                          <FormLabel htmlFor="department">Department</FormLabel>
-                          <Input
-                            variant={"filled"}
-                            {...field}
-                            id="department"
-                            placeholder="Enter department"
-                          />
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="department" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    <Field name="category">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(form.errors.category && form.touched.category)
-                          }
-                        >
-                          <FormLabel htmlFor="category">Category</FormLabel>
-                          <Select
-                            variant={"filled"}
-                            {...field}
-                            id="category"
-                            placeholder="Select category"
+                {({ isSubmitting }) => (
+                  <Form className="w-full ">
+                    <VStack spacing={{ md: 2, base: 8 }} align="flex-start">
+                      <Field name="title">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            isInvalid={
+                              !!(form.errors.title && form.touched.title)
+                            }
                           >
-                            <option value="fees">Fees</option>
-                            <option value="lab">Lab</option>
-                          </Select>
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="category" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
+                            <FormLabel htmlFor="title">Title</FormLabel>
+                            <Input
+                              variant={"filled"}
+                              {...field}
+                              id="title"
+                              placeholder="example: Please I need help to pay my first semester school fees"
+                            />
 
-                    <Field name="attachment">
-                      {({ form, field }: FieldProps) => (
-                        <FormControl
-                          mt={4}
-                          isInvalid={
-                            !!(
-                              form.errors.attachment && form.touched.attachment
-                            )
-                          }
-                        >
-                          <FormLabel htmlFor="attachment">Attachment</FormLabel>
-                          <Input
-                            variant={"filled"}
-                            {...field}
-                            id="attachment"
-                            type="file"
-                            onChange={(
-                              event: React.ChangeEvent<HTMLInputElement>
-                            ) => {
-                              form.setFieldValue(
-                                "attachment",
-                                event.currentTarget.files
-                                  ? event.currentTarget.files[0]
-                                  : null
-                              );
-                            }}
-                          />
-                          <Box mt={2} color="red.500" fontSize="sm">
-                            <ErrorMessage name="attachement" />
-                          </Box>
-                        </FormControl>
-                      )}
-                    </Field>
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="title" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
 
-                    <Button mt={4} colorScheme="teal" type="submit">
-                      Submit
-                    </Button>
-                  </VStack>
-                </Form>
+                      <Field name="content">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(form.errors.content && form.touched.content)
+                            }
+                          >
+                            <FormLabel htmlFor="content">content</FormLabel>
+                            <Textarea
+                              variant={"filled"}
+                              {...field}
+                              id="content"
+                              placeholder="Enter content"
+                            />
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="content" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="school">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(form.errors.school && form.touched.school)
+                            }
+                          >
+                            <FormLabel htmlFor="school">School</FormLabel>
+                            <Input
+                              variant={"filled"}
+                              {...field}
+                              id="school"
+                              placeholder="Enter school"
+                            />
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="school" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="faculty">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(form.errors.faculty && form.touched.faculty)
+                            }
+                          >
+                            <FormLabel htmlFor="faculty">Faculty</FormLabel>
+                            <Input
+                              variant={"filled"}
+                              {...field}
+                              id="faculty"
+                              placeholder="Enter faculty"
+                            />
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="faculty" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="department">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(
+                                form.errors.department &&
+                                form.touched.department
+                              )
+                            }
+                          >
+                            <FormLabel htmlFor="department">
+                              Department
+                            </FormLabel>
+                            <Input
+                              variant={"filled"}
+                              {...field}
+                              id="department"
+                              placeholder="Enter department"
+                            />
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="department" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="category">
+                        {({ field, form }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(form.errors.category && form.touched.category)
+                            }
+                          >
+                            <FormLabel htmlFor="category">Category</FormLabel>
+                            <Select
+                              variant={"filled"}
+                              {...field}
+                              id="category"
+                              placeholder="Select category"
+                            >
+                              <option value="fees">Fees</option>
+                              <option value="lab">Lab</option>
+                            </Select>
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="category" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="attachment">
+                        {({ form, field }: FieldProps) => (
+                          <FormControl
+                            mt={4}
+                            isInvalid={
+                              !!(
+                                form.errors.attachment &&
+                                form.touched.attachment
+                              )
+                            }
+                          >
+                            <FormLabel htmlFor="attachment">
+                              Attachment
+                            </FormLabel>
+                            <Input
+                              variant={"filled"}
+                              {...field}
+                              id="attachment"
+                              type="file"
+                              onChange={(
+                                event: React.ChangeEvent<HTMLInputElement>
+                              ) => {
+                                form.setFieldValue(
+                                  "attachment",
+                                  event.currentTarget.files
+                                    ? event.currentTarget.files[0]
+                                    : null
+                                );
+                              }}
+                            />
+                            <Box mt={2} color="red.500" fontSize="sm">
+                              <ErrorMessage name="attachement" />
+                            </Box>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Button
+                        mt={4}
+                        colorScheme="teal"
+                        type="submit"
+                        isLoading={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <Spinner size="sm" color="white" />
+                        ) : (
+                          "Submit"
+                        )}
+                      </Button>
+                    </VStack>
+                  </Form>
+                )}
               </Formik>
             </Stack>
           </Box>

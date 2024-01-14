@@ -1,11 +1,10 @@
-'use client'
-import LandingPage from '@/modules/landing/views/Home'
-import { Box } from '@chakra-ui/react'
+"use client";
+import LandingPage from "@/modules/landing/views/Home";
 
 export default function Home() {
   return (
-    <div >
-      <LandingPage/>
-      </div>
-  )
+    <div>
+      <LandingPage />
+    </div>
+  );
 }

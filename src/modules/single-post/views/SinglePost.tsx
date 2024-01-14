@@ -9,6 +9,7 @@ import {
   CardBody,
   Divider,
   Flex,
+  HStack,
   Heading,
   Input,
   Modal,
@@ -70,18 +71,17 @@ export default function PostDetails() {
     fetchBills();
   }, [slugParams.id]);
   return (
-    <Box>
+    <Box mx={{ md: "8px" }}>
       <Header />
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          {/* <ModalHeader>Modal Title</ModalHeader> */}
           <ModalCloseButton />
           <ModalBody>
             <Heading fontSize={"x-small"} as={"h6"}>
-              You are about to help {post?.first_name} with part/full of her
-              outstanding school fees
+              You are about to help {post?.student?.first_name} with part/full
+              of the outstanding school fees
             </Heading>
 
             <Box mt={8}>
@@ -133,27 +133,37 @@ export default function PostDetails() {
       >
         <Box width="70%">
           <Stack spacing={4}>
+            <Box display="inline-block">
+              <HStack>
+                <Text textTransform="uppercase" fontSize={"11px"}>
+                  {post?.student?.first_name} {post?.student?.last_name} |
+                </Text>
+                <Text fontSize={"11px"}>
+                  Posted{" "}
+                  {post?.createdAt === undefined
+                    ? ""
+                    : formatTimeAgo(post?.createdAt)}
+                </Text>
+              </HStack>
+            </Box>
+
             <Heading fontSize={"x-large"}>{post?.title}</Heading>
-            <Heading mb={4} color={"gray"} as="h6" fontSize={"15px"}>
-              Posted{" "}
-              {post?.createdAt === undefined
-                ? ""
-                : formatTimeAgo(post?.createdAt)}
-            </Heading>
           </Stack>
 
           <Divider my="2" />
-          <Text fontSize="xl">{post?.content}</Text>
+          <Text fontSize="large" mr={3}>
+            {post?.content}
+          </Text>
           <Divider my={2} />
 
-          <Box mx={8}>
+          <Box mr={6}>
             <Stack onClick={onOpen} my={8}>
               <Card
                 variant="outline"
                 _hover={{
                   border: "1px solid teal",
                   boxShadow: "md",
-                  transform: "scale(1.09)",
+                  transform: "scale(1.04)",
                   // transform: "translateY(-24px)",
                   transition: "0.3s",
                 }}
@@ -166,8 +176,12 @@ export default function PostDetails() {
                 </CardBody>
 
                 <Flex justify={"space-between"} mx={6}>
-                  <Text>{bills?.outstanding_fee.amount}</Text>
-                  <Text ml={8}>Pay</Text>
+                  <Text fontWeight={"bold"}>
+                    {bills?.outstanding_fee.amount} Naira
+                  </Text>
+                  <Text fontWeight={"bold"} ml={8}>
+                    Help
+                  </Text>
                 </Flex>
               </Card>
             </Stack>
@@ -199,6 +213,7 @@ export default function PostDetails() {
         <Box width="30%" padding="4">
           <Flex flexDirection={{ md: "column", base: "row" }}>
             <Button
+              onClick={onOpen}
               w={{ base: "50%", md: "100%" }}
               bg="teal.500"
               color="white"
