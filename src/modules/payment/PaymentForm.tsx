@@ -88,7 +88,7 @@ const PaymentForm = ({ amount }: PaymentFormProps) => {
                     className={`mt-4 bg-blue-500 w-full hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded`}
                     // disabled={isSubmitting}
                   >
-                    Login
+                    Proceed
                   </Button>
                 </Box>
               </Form>
