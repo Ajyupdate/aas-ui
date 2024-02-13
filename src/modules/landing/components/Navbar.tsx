@@ -1,5 +1,4 @@
 "use client";
-
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
@@ -19,6 +18,8 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import Image from "next/image";
+import BellIcon from "../../../../public/bell.svg";
 
 interface Props {
   children: React.ReactNode;
@@ -68,11 +69,11 @@ const Header: React.FC = () => {
                 href="/"
               >
                 <Heading
-                  color={"white"}
+                  // color={"white"}
                   fontWeight={{ base: 700, md: 700 }}
                   fontSize={"24px"}
                 >
-                  Finchhh
+                  Finch
                 </Heading>
               </Link>
             </Box>
@@ -89,7 +90,7 @@ const Header: React.FC = () => {
             </Box> */}
 
             <Box mr={6} display={{ md: "block", base: "none" }}>
-              hi
+              <Image src={BellIcon} alt="bell icon" />
             </Box>
 
             <Menu>
