@@ -5,11 +5,11 @@ import {
   Avatar,
   Box,
   Button,
-  Divider,
   Flex,
   HStack,
   Heading,
   IconButton,
+  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -18,16 +18,11 @@ import {
   VStack,
   useColorModeValue,
   useDisclosure,
-  Link
 } from "@chakra-ui/react";
 
-import Image from "next/image";
-// import SettingsIcon from "../../../public/Icon.svg";
-// import BellIcon from "../../../public/bell.svg";
-import BellIcon from "../../../../public/bell.svg"
 interface Props {
   children: React.ReactNode;
-}                                                   
+}
 
 const Links = ["Dashboard", "Projects", "Team"];
 
@@ -55,7 +50,7 @@ const Header: React.FC = () => {
 
   return (
     <Box width={"auto"}>
-      <Box px={{ md: 16, base: 6 }}>
+      <Box>
         <Flex
           mt={{ md: "unset", base: 12 }}
           pb={2}
@@ -65,28 +60,28 @@ const Header: React.FC = () => {
         >
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Link 
-               _hover={{
-                
-                textDecoration: "none"
-              }}
-              textDecoration={'none'} href="/">
-               <Heading fontWeight={{ base: 700, md: 700 }} fontSize={"24px"}>
-                AAS
-
-              </Heading>
+              <Link
+                _hover={{
+                  textDecoration: "none",
+                }}
+                textDecoration={"none"}
+                href="/"
+              >
+                <Heading
+                  color={"white"}
+                  fontWeight={{ base: 700, md: 700 }}
+                  fontSize={"24px"}
+                >
+                  Finchhh
+                </Heading>
               </Link>
             </Box>
-            <Box  display={{ md: "block", base: "none" }}>
+            <Box display={{ md: "block", base: "none" }}>
               <Link>Help</Link>
             </Box>
-            <Box  display={{ md: "block", base: "none" }}>
-             <Link href="/need-help">
-             Need Help?
-             </Link>
+            <Box display={{ md: "block", base: "none" }}>
+              <Link href="/need-help">Need Help?</Link>
             </Box>
-
-            
           </HStack>
           <Flex alignItems={"center"}>
             {/* <Box mr={6} display={{ md: "block", base: "none" }}>
@@ -94,9 +89,8 @@ const Header: React.FC = () => {
             </Box> */}
 
             <Box mr={6} display={{ md: "block", base: "none" }}>
-              <Image src={BellIcon} alt="bell icon" />
+              hi
             </Box>
-
 
             <Menu>
               <MenuButton
@@ -138,8 +132,6 @@ const Header: React.FC = () => {
           </Flex>
         </Flex>
       </Box>
-      
-     
     </Box>
   );
 };
