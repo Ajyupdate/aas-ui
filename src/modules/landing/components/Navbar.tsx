@@ -19,8 +19,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import BellIcon from "../../../../public/bell.svg";
 
+// import SettingsIcon from "../../../public/Icon.svg";
+// import BellIcon from "../../../public/bell.svg";
+import BellIcon from "../../../../public/bell.svg";
 interface Props {
   children: React.ReactNode;
 }
@@ -68,12 +70,9 @@ const Header: React.FC = () => {
                 textDecoration={"none"}
                 href="/"
               >
-                <Heading
-                  // color={"white"}
-                  fontWeight={{ base: 700, md: 700 }}
-                  fontSize={"24px"}
-                >
-                  Finch
+
+                <Heading fontWeight={{ base: 700, md: 700 }} fontSize={"24px"}>
+                  AAS
                 </Heading>
               </Link>
             </Box>
@@ -81,7 +80,11 @@ const Header: React.FC = () => {
               <Link>Help</Link>
             </Box>
             <Box display={{ md: "block", base: "none" }}>
+
+              <Link href="/">Need Help?</Link>
+
               <Link href="/need-help">Need Help?</Link>
+
             </Box>
           </HStack>
           <Flex alignItems={"center"}>
