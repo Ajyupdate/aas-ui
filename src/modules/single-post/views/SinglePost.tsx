@@ -135,7 +135,7 @@ export default function PostDetails() {
             <Box display="inline-block">
               <HStack>
                 <Text textTransform="uppercase" fontSize={"11px"}>
-                  Ajibade Emmanuel |
+                  Ajibade Adetomiwa |
                 </Text>
                 <Text fontSize={"11px"}>Posted 3 months ago</Text>
               </HStack>
