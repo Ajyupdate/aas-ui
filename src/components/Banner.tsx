@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 export default function Banner() {
   return (
     <Flex
-      minH="100vh"
+      minHeight="100vh"
       alignItems="center"
       justifyContent="center"
       backgroundImage="url('/auth-bg.jpg')"

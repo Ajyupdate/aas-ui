@@ -4,7 +4,7 @@ import { Box, Grid } from "@chakra-ui/react";
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <Grid templateColumns={{ md: "repeat(2, 1fr)", base: "repeat(1, 1fr)" }}>
-      <Box>
+      <Box className="border">
         <Banner />
       </Box>
 
