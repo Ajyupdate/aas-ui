@@ -1,5 +1,4 @@
 "use client";
-
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
@@ -19,8 +18,8 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-
 import Image from "next/image";
+
 // import SettingsIcon from "../../../public/Icon.svg";
 // import BellIcon from "../../../public/bell.svg";
 import BellIcon from "../../../../public/bell.svg";
@@ -54,7 +53,7 @@ const Header: React.FC = () => {
 
   return (
     <Box width={"auto"}>
-      <Box px={{ md: 16, base: 6 }}>
+      <Box>
         <Flex
           mt={{ md: "unset", base: 12 }}
           pb={2}
@@ -71,6 +70,7 @@ const Header: React.FC = () => {
                 textDecoration={"none"}
                 href="/"
               >
+
                 <Heading fontWeight={{ base: 700, md: 700 }} fontSize={"24px"}>
                   AAS
                 </Heading>
@@ -80,7 +80,11 @@ const Header: React.FC = () => {
               <Link>Help</Link>
             </Box>
             <Box display={{ md: "block", base: "none" }}>
+
               <Link href="/">Need Help?</Link>
+
+              <Link href="/need-help">Need Help?</Link>
+
             </Box>
           </HStack>
           <Flex alignItems={"center"}>

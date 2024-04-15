@@ -44,9 +44,9 @@ export default function LandingPage() {
   }, []); //
 
   return (
-    <Box>
+    <Box px={{ md: 16, base: 6 }}>
       <Header />
-      <Box px={{ md: 16, base: 6 }} mt={10}>
+      <Box mt={10}>
         <Heading fontSize={"40px"}>Hi Ajibade</Heading>
         <Stack spacing={4} mt={16} w={"70%"}>
           <InputGroup>
