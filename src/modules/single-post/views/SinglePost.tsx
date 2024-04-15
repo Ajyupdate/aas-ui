@@ -4,9 +4,10 @@ import { iSchoolInfoProps } from "@/types/SchoolInfo";
 import {
   Box,
   Button,
+  Card,
+  CardBody,
   Divider,
   Flex,
-  Grid,
   HStack,
   Heading,
   Input,
@@ -16,16 +17,17 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
+  Stack,
+  Tag,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { FaRegBookmark } from "react-icons/fa6";
 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
+
 export default function PostDetails() {
   const [post, setPost] = useState<iPostsProps | null>(null);
   const [bills, setBills] = useState<iSchoolInfoProps>();
@@ -68,31 +70,24 @@ export default function PostDetails() {
     fetchBills();
   }, [slugParams.id]);
   return (
-    <Box mx={{ md: "15%" }}>
-      <Box h={"100"} mt={4}>
-        <Header />
-      </Box>
+    <Box mx={{ md: "8px" }}>
+      <Header />
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody p={6}>
+          <ModalBody>
             <Heading fontSize={"x-small"} as={"h6"}>
-
               You are about to help Ajibade Emmanuel with part/full of the
               outstanding school fees
-
-             
             </Heading>
 
             <Box mt={8}>
               <Flex justify={"space-between"}>
                 <Box>
-
                   session: <br />
                   2021/2022
-
                 </Box>
 
                 <Box>
@@ -128,158 +123,7 @@ export default function PostDetails() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Box>
-        <Heading fontSize={"x-large"}>{post?.title}</Heading>
-        <HStack mt={8} justify={"space-between"}>
-          {/* <Avatar
-            height={"40px"}
-            width={"40px"}
-            name={`${post.student?.first_name} ${post.student?.last_name}`}
-            src="https://bit.ly/dan-abramov"
-            size="md"
-          /> */}
-          <Box>
-            <Box>
-              <Text fontWeight={"semibold"} fontSize={"sm"}>
-                {post?.student?.first_name} {post?.student?.last_name}
-              </Text>
-
-              <Flex mt={2}>
-                <Text fontSize={"11px"} color={"gray.500"}>
-                  200 Level Student{" "}
-                </Text>
-                <Text mx={2} fontSize={"11px"}>
-                  {" "}
-                  |{" "}
-                </Text>
-                <Text fontSize={"11px"}>
-                  {" "}
-                  Posted {post?.createdAt === undefined
-                        ? ""
-                        : formatTimeAgo(post?.createdAt)}
-                </Text>
-              </Flex>
-            </Box>
-            {/* <Text fontSize={"11px"}>
-              Posted{" "}
-              {post?.createdAt === undefined
-                ? ""
-                : formatTimeAgo(post?.createdAt)}
-            </Text> */}
-          </Box>
-
-          <HStack>
-            <Box mt={2}>
-              <FaRegHeart />
-            </Box>
-
-            <Box mx={4} mt={2}>
-              <FaRegBookmark />
-            </Box>
-
-            <Button
-              onClick={onOpen}
-              size={"sm"}
-              mt={{ md: 2 }}
-              // w={{ base: "50%", md: "100%" }}
-              bg="teal.500"
-              color="white"
-              _hover={{ bg: "teal.600" }}
-              _active={{ bg: "teal.700" }}
-              rounded="full"
-              border="2px solid teal.500"
-              borderColor="teal.500"
-              // px="4"
-              // py="2"
-            >
-              Help pay
-            </Button>
-          </HStack>
-        </HStack>
-
-        <Text mt={4} my={8}>
-          {post?.content}
-        </Text>
-        <Flex alignItems="center" my={12}>
-          <Divider flex="1" borderColor="black" />
-          <Text mx="4" fontSize="xl" fontWeight="bold">
-            Student Details
-          </Text>
-          <Divider flex="1" borderColor="black" />
-        </Flex>
-
-        <Box bg={"gray.50"} mb={16}>
-          <Grid templateColumns="repeat(3, 1fr)">
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Name:</Text>
-                <Text>
-                  {post?.student?.first_name} {post?.student?.last_name}
-                </Text>
-              </Box>
-            </Flex>
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Faculty:</Text>
-                <Text>{post?.student?.faculty}</Text>
-              </Box>
-            </Flex>
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Department:</Text>
-                <Text>{post?.student?.department}</Text>
-              </Box>
-            </Flex>
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Level:</Text>
-                <Text>200 </Text>
-              </Box>
-            </Flex>
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Email:</Text>
-                <Text>{post?.student?.email}</Text>
-              </Box>
-            </Flex>
-
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Academic Session:</Text>
-                <Text>{bills?.outstanding_fee.session} </Text>
-              </Box>
-            </Flex>
-
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Amount Needed:</Text>
-                <Text>{bills?.outstanding_fee.amount}</Text>
-              </Box>
-            </Flex>
-
-            <Flex p={4}>
-              <Box border="2px solid teal" />
-              <Box ml={2}>
-                <Text color={"gray.500"}>Request Type:</Text>
-                <Text>{post?.category}</Text>
-              </Box>
-            </Flex>
-          </Grid>
-          <Box p={4}>
-            <Button onClick={onOpen} width="100%" colorScheme="teal">
-              Help pay any amount
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-      {/* <Flex
+      <Flex
         flexDirection={{ md: "row", base: "column" }}
         mt={8}
         height="100vh"
@@ -291,7 +135,7 @@ export default function PostDetails() {
             <Box display="inline-block">
               <HStack>
                 <Text textTransform="uppercase" fontSize={"11px"}>
-                  Ajibade Adetomiwa |
+                  Ajibade Emmanuel |
                 </Text>
                 <Text fontSize={"11px"}>Posted 3 months ago</Text>
               </HStack>
@@ -362,10 +206,24 @@ export default function PostDetails() {
 
         <Box width="0.5" bg="#ccc" height="100%" />
 
-        
+        {/* Right Section (30%) */}
         <Box width="30%" padding="4">
           <Flex flexDirection={{ md: "column", base: "row" }}>
-             
+            <Button
+              onClick={onOpen}
+              w={{ base: "50%", md: "100%" }}
+              bg="teal.500"
+              color="white"
+              _hover={{ bg: "teal.600" }}
+              _active={{ bg: "teal.700" }}
+              rounded="full" // or use "md" for medium curve or "lg" for large curve
+              border="2px solid teal.500" // Border color matches the background color
+              borderColor="teal.500" // Border color matches the background color
+              px="4" // Horizontal padding
+              py="2" // Vertical padding
+            >
+              Help pay
+            </Button>
 
             <Button
               mt={{ md: 2 }}
@@ -374,18 +232,18 @@ export default function PostDetails() {
               color="white"
               _hover={{ bg: "teal.600" }}
               _active={{ bg: "teal.700" }}
-              rounded="full"
-              border="2px solid teal.500" 
-              borderColor="teal.500" 
-              px="4" 
-              py="2" 
+              rounded="full" // or use "md" for medium curve or "lg" for large curve
+              border="2px solid teal.500" // Border color matches the background color
+              borderColor="teal.500" // Border color matches the background color
+              px="4" // Horizontal padding
+              py="2" // Vertical padding
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                
+                // fill={saved ? "green" : "none"}
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -395,9 +253,9 @@ export default function PostDetails() {
               </svg>
               <Text ml={2}>Save Post</Text>
             </Button>
-          </Flex> */}
-      {/* </Box>
-      </Flex> */}
+          </Flex>
+        </Box>
+      </Flex>
     </Box>
   );
 }
