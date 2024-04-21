@@ -1,4 +1,3 @@
-import { formatTimeAgo } from "@/components/formatTimeAgo";
 import Header from "@/modules/landing/components/Navbar";
 import { iPostsProps } from "@/types/Posts";
 import { iSchoolInfoProps } from "@/types/SchoolInfo";
@@ -80,15 +79,15 @@ export default function PostDetails() {
           <ModalCloseButton />
           <ModalBody>
             <Heading fontSize={"x-small"} as={"h6"}>
-              You are about to help {post?.student?.first_name} with part/full
-              of the outstanding school fees
+              You are about to help Ajibade Emmanuel with part/full of the
+              outstanding school fees
             </Heading>
 
             <Box mt={8}>
               <Flex justify={"space-between"}>
                 <Box>
                   session: <br />
-                  {bills?.outstanding_fee.bills_title}
+                  2021/2022
                 </Box>
 
                 <Box>
@@ -136,23 +135,25 @@ export default function PostDetails() {
             <Box display="inline-block">
               <HStack>
                 <Text textTransform="uppercase" fontSize={"11px"}>
-                  {post?.student?.first_name} {post?.student?.last_name} |
+                  Ajibade Emmanuel |
                 </Text>
-                <Text fontSize={"11px"}>
-                  Posted{" "}
-                  {post?.createdAt === undefined
-                    ? ""
-                    : formatTimeAgo(post?.createdAt)}
-                </Text>
+                <Text fontSize={"11px"}>Posted 3 months ago</Text>
               </HStack>
             </Box>
 
-            <Heading fontSize={"x-large"}>{post?.title}</Heading>
+            <Heading fontSize={"x-large"}>Second Semester school fees</Heading>
           </Stack>
 
           <Divider my="2" />
           <Text fontSize="large" mr={3}>
-            {post?.content}
+            Dear friends, alumni and community, I am reaching out with a humble
+            request for your support. I am in need of financial assistance to
+            fund my first semester school fees at the university of Lagos .
+            Every contribution, no matter the size, will make a significant
+            impact on my journey. Your generosity will not only help me achieve
+            my educational goals but also empower me to give back to the
+            community in the future. Thank you for considering and being a part
+            of my educational journey. Together, we can make dreams come true.
           </Text>
           <Divider my={2} />
 
@@ -169,16 +170,12 @@ export default function PostDetails() {
                 }}
               >
                 <CardBody>
-                  <Heading size="md">
-                    {bills?.outstanding_fee.bills_title}
-                  </Heading>
-                  <Text py="2">{bills?.outstanding_fee.session}</Text>
+                  <Heading size="md">School Fees</Heading>
+                  <Text py="2">2021/2022</Text>
                 </CardBody>
 
                 <Flex justify={"space-between"} mx={6}>
-                  <Text fontWeight={"bold"}>
-                    {bills?.outstanding_fee.amount} Naira
-                  </Text>
+                  <Text fontWeight={"bold"}>30000 Naira</Text>
                   <Text fontWeight={"bold"} ml={8}>
                     Help
                   </Text>
@@ -192,16 +189,16 @@ export default function PostDetails() {
           <Box mx={4}>
             <Heading>About Student</Heading>
             <Text>
-              Student at {post?.student?.school}, first class CGPA. Needs the
-              sum of 20000 naira to pay school fees. 10000 minimum to register
-              course . balance needed to write exam
+              Student at unilag, first class CGPA. Needs the sum of 20000 naira
+              to pay school fees. 10000 minimum to register course . balance
+              needed to write exam
             </Text>
 
             <Box height={"20vh"}>
               <Flex>
-                <Tag>Faculty of {post?.student?.faculty}</Tag>
-                <Tag ml={4}>Department of {post?.student?.department}</Tag>
-                <Tag ml={4}>{post?.category}</Tag>
+                <Tag>Faculty of Science</Tag>
+                <Tag ml={4}>Department of Mathematics</Tag>
+                <Tag ml={4}>School Fees</Tag>
               </Flex>
             </Box>
           </Box>

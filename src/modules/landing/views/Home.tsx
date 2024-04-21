@@ -9,7 +9,6 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Jacques_Francois_Shadow } from "next/font/google";
@@ -49,18 +48,18 @@ export default function LandingPage() {
   return (
     <Box pt={6}>
       <Header />
-      <Box px={{ md: 20, base: 6 }} mt={10}>
-        <Flex justify={"center"}>
-          <Text fontSize={"35px"} mb={12} mt={4} className={Jacques.className}>
-            AAS - Assist A Student
-          </Text>
-        </Flex>
-
-        <Stack>
-          <Heading fontWeight={"400"}>Hello,</Heading>
-          <Text color={"rgba(39, 39, 39, 0.7)"}>
-            What do you want to do today?
-          </Text>
+      <Box px={{ md: 16, base: 6 }} mt={10}>
+        <Heading fontSize={"40px"}>Hi Ajibade</Heading>
+        <Stack spacing={4} mt={16} w={"70%"}>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">
+              <SearchIcon color="gray.300" />
+            </InputLeftElement>
+            <Input
+              type="text"
+              placeholder="Search using keywords: school fees, science, art e.t.c"
+            />
+          </InputGroup>
         </Stack>
 
         <Flex justifyContent={"flex-start"} my={4}>
