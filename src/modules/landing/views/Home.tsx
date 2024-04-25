@@ -3,21 +3,20 @@ import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Center,
   Flex,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { Jacques_Francois_Shadow } from "next/font/google";
 import { useEffect, useState } from "react";
-import Header from "../components/Navbar";
+import Header, { Jacques } from "../components/Navbar";
 import NeedHelp from "../components/NeedHelp";
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
-
-const Jacques = Jacques_Francois_Shadow({ subsets: ["latin"], weight: "400" });
 
 export default function LandingPage() {
   const [posts, setPosts] = useState<iPostsProps[]>([]);
@@ -49,8 +48,15 @@ export default function LandingPage() {
     <Box pt={6}>
       <Header />
       <Box px={{ md: 16, base: 6 }} mt={10}>
-        <Heading fontSize={"40px"}>Hi Ajibade</Heading>
-        <Stack spacing={4} mt={16} w={"70%"}>
+        <Heading fontSize={"40px"} mb={20} mt={10}>
+          <Center className={Jacques.className}>AAS - Assist A Student</Center>
+        </Heading>
+
+        <Heading>Hello,</Heading>
+        <Text color={"rgba(39, 39, 39, 0.7)"} my={4}>
+          What do you want to do today?
+        </Text>
+        {/* <Stack spacing={4} mt={16} w={"70%"}>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               <SearchIcon color="gray.300" />
@@ -60,9 +66,9 @@ export default function LandingPage() {
               placeholder="Search using keywords: school fees, science, art e.t.c"
             />
           </InputGroup>
-        </Stack>
+        </Stack> */}
 
-        <Flex justifyContent={"flex-start"} my={4}>
+        <Flex justifyContent={"flex-start"} mt={4}>
           <Button
             fontWeight={"medium"}
             fontSize={"16px"}

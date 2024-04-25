@@ -18,7 +18,10 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Jacques = Jacques_Francois_Shadow({ subsets: ["latin"], weight: "400" });
+export const Jacques = Jacques_Francois_Shadow({
+  subsets: ["latin"],
+  weight: "400",
+});
 const Links = ["Dashboard", "Projects", "Team"];
 
 const NavLink = (props: Props) => {

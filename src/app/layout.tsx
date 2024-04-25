@@ -3,9 +3,13 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 import Footer from "@/components/Footer";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./provider";
-
+const myFont = localFont({
+  src: "../../public/fonts/Sailec Medium.ttf",
+  display: "swap",
+});
 const inter = Roboto({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
@@ -20,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={myFont.className}>
         <Providers>
           <Box bg={"#F7FAFC"}>
             {children}
