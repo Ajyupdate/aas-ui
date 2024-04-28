@@ -1,14 +1,11 @@
+import { formatTimeAgo } from "@/components/formatTimeAgo";
 import Header from "@/modules/landing/components/Navbar";
 import { iPostsProps } from "@/types/Posts";
 import { iSchoolInfoProps } from "@/types/SchoolInfo";
 import {
   Box,
   Button,
-  Card,
-  CardBody,
-  Divider,
   Flex,
-  HStack,
   Heading,
   Input,
   Modal,
@@ -17,9 +14,9 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
-  Stack,
   Tag,
   Text,
+  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -57,6 +54,7 @@ export default function PostDetails() {
     fetchSinglePost();
   }, [slugParams.id]);
 
+  console.log(post);
   useEffect(() => {
     const fetchBills = async () => {
       try {
@@ -71,8 +69,9 @@ export default function PostDetails() {
   }, [slugParams.id]);
   return (
     <Box mx={{ md: "8px" }}>
-      <Header />
-
+      <Box pt={8}>
+        <Header />
+      </Box>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -123,139 +122,137 @@ export default function PostDetails() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Flex
-        flexDirection={{ md: "row", base: "column" }}
-        mt={8}
-        height="100vh"
-        ml={{ md: 24 }}
-        mr={4}
-      >
-        <Box width="70%">
-          <Stack spacing={4}>
-            <Box display="inline-block">
-              <HStack>
-                <Text textTransform="uppercase" fontSize={"11px"}>
-                  Ajibade Emmanuel |
-                </Text>
-                <Text fontSize={"11px"}>Posted 3 months ago</Text>
-              </HStack>
-            </Box>
-
-            <Heading fontSize={"x-large"}>Second Semester school fees</Heading>
-          </Stack>
-
-          <Divider my="2" />
-          <Text fontSize="large" mr={3}>
-            Dear friends, alumni and community, I am reaching out with a humble
-            request for your support. I am in need of financial assistance to
-            fund my first semester school fees at the university of Lagos .
-            Every contribution, no matter the size, will make a significant
-            impact on my journey. Your generosity will not only help me achieve
-            my educational goals but also empower me to give back to the
-            community in the future. Thank you for considering and being a part
-            of my educational journey. Together, we can make dreams come true.
-          </Text>
-          <Divider my={2} />
-
-          <Box mr={6}>
-            <Stack onClick={onOpen} my={8}>
-              <Card
-                variant="outline"
-                _hover={{
-                  border: "1px solid teal",
-                  boxShadow: "md",
-                  transform: "scale(1.04)",
-                  // transform: "translateY(-24px)",
-                  transition: "0.3s",
-                }}
-              >
-                <CardBody>
-                  <Heading size="md">School Fees</Heading>
-                  <Text py="2">2021/2022</Text>
-                </CardBody>
-
-                <Flex justify={"space-between"} mx={6}>
-                  <Text fontWeight={"bold"}>30000 Naira</Text>
-                  <Text fontWeight={"bold"} ml={8}>
-                    Help
-                  </Text>
-                </Flex>
-              </Card>
-            </Stack>
-          </Box>
-
-          <Divider my="2" />
-
-          <Box mx={4}>
-            <Heading>About Student</Heading>
-            <Text>
-              Student at unilag, first class CGPA. Needs the sum of 20000 naira
-              to pay school fees. 10000 minimum to register course . balance
-              needed to write exam
+      <Flex mx={{ md: 20, base: 6 }} mt={8}>
+        <Box bgColor="teal" p={8} rounded="xl">
+          {" "}
+          {/* Apply rounded top corners to the first Box */}
+          <VStack align="start" spacing={2} color="white">
+            <Heading fontSize={"20px"} fontWeight={400}>
+              {post?.category}
+            </Heading>
+            d
+            <Text fontSize={"16px"} mt={4} fontWeight={400}>
+              2023/2024
             </Text>
-
-            <Box height={"20vh"}>
-              <Flex>
-                <Tag>Faculty of Science</Tag>
-                <Tag ml={4}>Department of Mathematics</Tag>
-                <Tag ml={4}>School Fees</Tag>
-              </Flex>
-            </Box>
-          </Box>
-        </Box>
-
-        <Box width="0.5" bg="#ccc" height="100%" />
-
-        {/* Right Section (30%) */}
-        <Box width="30%" padding="4">
-          <Flex flexDirection={{ md: "column", base: "row" }}>
-            <Button
-              onClick={onOpen}
-              w={{ base: "50%", md: "100%" }}
-              bg="teal.500"
-              color="white"
-              _hover={{ bg: "teal.600" }}
-              _active={{ bg: "teal.700" }}
-              rounded="full" // or use "md" for medium curve or "lg" for large curve
-              border="2px solid teal.500" // Border color matches the background color
-              borderColor="teal.500" // Border color matches the background color
-              px="4" // Horizontal padding
-              py="2" // Vertical padding
-            >
-              Help pay
-            </Button>
-
-            <Button
-              mt={{ md: 2 }}
-              w={{ base: "50%", md: "100%" }}
-              bg="teal.500"
-              color="white"
-              _hover={{ bg: "teal.600" }}
-              _active={{ bg: "teal.700" }}
-              rounded="full" // or use "md" for medium curve or "lg" for large curve
-              border="2px solid teal.500" // Border color matches the background color
-              borderColor="teal.500" // Border color matches the background color
-              px="4" // Horizontal padding
-              py="2" // Vertical padding
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                // fill={saved ? "green" : "none"}
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <Flex mb={1} mt={2}>
+              <Tag
+                h="30px" // Height
+                borderRadius="20px" // Border radius
+                padding="5px 10px" // Padding
+                gap="10px" // Gap between elements (for button group)
+                size="sm"
+                fontSize={"14px"}
+                fontWeight={400}
+                color={"#727272"}
               >
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C15.09 3.81 16.76 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
-              <Text ml={2}>Save Post</Text>
-            </Button>
-          </Flex>
+                {post?.student?.faculty}
+              </Tag>
+              <Tag
+                ml={1}
+                h="30px" // Height
+                borderRadius="20px" // Border radius
+                padding="5px 10px" // Padding
+                gap="10px" // Gap between elements (for button group)
+                size="sm"
+                fontSize={"14px"}
+                fontWeight={400}
+                color={"#727272"}
+              >
+                {post?.student?.department}
+              </Tag>
+              <Tag
+                ml={1}
+                h="30px" // Height
+                borderRadius="20px" // Border radius
+                padding="5px 10px" // Padding
+                gap="10px" // Gap between elements (for button group)
+                size="sm"
+                fontSize={"14px"}
+                fontWeight={400}
+                color={"#727272"}
+              >
+                {post?.category}
+              </Tag>
+            </Flex>
+          </VStack>
         </Box>
       </Flex>
+
+      <Text my={8} mx={{ md: 20, base: 6 }} color={"#9B9999"}>
+        {post?.student?.first_name} {post?.student?.last_name} | Published{" "}
+        {post?.createdAt ? formatTimeAgo(post?.createdAt) : ""}
+      </Text>
+
+      <Heading
+        mx={{ md: 20, base: 6 }}
+        fontWeight={400}
+        color={"#121212"}
+        fontSize={"24px"}
+      >
+        {post?.title}
+      </Heading>
+
+      <Text
+        mt={8}
+        fontSize={"18px"}
+        fontWeight={400}
+        ml={{ md: 20, base: 6 }}
+        mr={{ md: "30%", base: 6 }}
+        color={"#727272"}
+      >
+        {post?.content}
+      </Text>
+
+      <Box my={8} mx={{ md: 20, base: 6 }}>
+        <Flex>
+          <Button
+            fontSize={"16px"}
+            fontWeight={400}
+            onClick={onOpen}
+            bg="teal.500"
+            color="white"
+            _hover={{ bg: "teal.600" }}
+            _active={{ bg: "teal.700" }}
+            rounded="full" // or use "md" for medium curve or "lg" for large curve
+            border="2px solid teal.500" // Border color matches the background color
+            borderColor="teal.500" // Border color matches the background color
+            px="4" // Horizontal padding
+            py="2" // Vertical padding
+          >
+            Help pay
+          </Button>
+
+          <Button
+            ml={2}
+            colorScheme="teal"
+            color={"#121212"}
+            // color="white"
+            variant={"outline"}
+            _hover={{ bg: "teal.600", color: "white" }}
+            _active={{ bg: '"teal.700"' }}
+            rounded="full" // or use "md" for medium curve or "lg" for large curve
+            px="4" // Horizontal padding
+            py="2" // Vertical padding
+            fontSize={"16px"}
+            fontWeight={400}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              // fill={saved ? "green" : "none"}
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C15.09 3.81 16.76 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <Text ml={2}>Save Post</Text>
+          </Button>
+        </Flex>
+      </Box>
     </Box>
   );
 }

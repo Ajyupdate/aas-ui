@@ -3,17 +3,16 @@ import { iPostsProps } from "@/types/Posts";
 import {
   Box,
   Button,
+  Center,
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   Select,
   Spinner,
   Stack,
   Textarea,
   VStack,
-  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -21,7 +20,6 @@ import { ErrorMessage, Field, FieldProps, Form, Formik } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import NeedHelpImage from "../../../../public/need-help.jpg";
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
 // interface FormData {
 //   title: string;
@@ -51,9 +49,9 @@ const validationSchema = Yup.object().shape({
   content: Yup.string()
     .min(50, "Content must be at least 50 characters")
     .required("content are required"),
-  school: Yup.string().required("School is required"),
-  faculty: Yup.string().required("Faculty is required"),
-  department: Yup.string().required("Department is required"),
+  // school: Yup.string().required("School is required"),
+  // faculty: Yup.string().required("Faculty is required"),
+  // department: Yup.string().required("Department is required"),
   category: Yup.string().required("Category is required"),
   // attachment: Yup.mixed().required('Attachment is required'),
 });
@@ -101,7 +99,9 @@ export default function NeedHelp() {
 
   return (
     <Box>
-      <Header />
+      <Box pt={4}>
+        <Header />
+      </Box>
 
       <div
         style={{
@@ -111,46 +111,23 @@ export default function NeedHelp() {
           height: "60vh",
         }}
       >
-        <Image src={NeedHelpImage} fill={true} alt={"Background Image"} />
-
-        {/* The child element */}
-        <div
-          style={{
-            // use absolute position for the child element
-            position: "absolute",
-            top: "20%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            // use higher zIndex than the image
-            zIndex: 4,
-            //   background: "yellow",
-            //   padding: "30px",
-            //   boxShadow: "0 0 10px rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "50px",
-              color: "black",
-            }}
-          >
-            Every One Needs Help
-          </h1>
-        </div>
+        <Image src="/bg.png" fill={true} alt={"Background Image"} />
       </div>
 
       <Flex minH={"100vh"} mt={4} align={"center"} justify={"center"}>
         <Stack spacing={8} mx={"auto"} mt={4} maxW={"lg"} py={12}>
           <Box
             rounded={"lg"}
-            bg={useColorModeValue("white", "gray.700")}
+            // bg={useColorModeValue("white", "gray.700")}
             boxShadow={"none"}
             shadow={"none"}
             p={8}
             w={{ md: "500px", base: "350px" }}
           >
             <Stack spacing={4}>
-              <Heading as={"h3"}>What do you need help for?</Heading>
+              <Center fontSize={"28px"} fontWeight={400}>
+                What do you need help for?
+              </Center>
 
               <Formik
                 initialValues={initialValues}
@@ -199,77 +176,6 @@ export default function NeedHelp() {
                             />
                             <Box mt={2} color="red.500" fontSize="sm">
                               <ErrorMessage name="content" />
-                            </Box>
-                          </FormControl>
-                        )}
-                      </Field>
-
-                      <Field name="school">
-                        {({ field, form }: FieldProps) => (
-                          <FormControl
-                            mt={4}
-                            isInvalid={
-                              !!(form.errors.school && form.touched.school)
-                            }
-                          >
-                            <FormLabel htmlFor="school">School</FormLabel>
-                            <Input
-                              variant={"filled"}
-                              {...field}
-                              id="school"
-                              placeholder="Enter school"
-                            />
-                            <Box mt={2} color="red.500" fontSize="sm">
-                              <ErrorMessage name="school" />
-                            </Box>
-                          </FormControl>
-                        )}
-                      </Field>
-
-                      <Field name="faculty">
-                        {({ field, form }: FieldProps) => (
-                          <FormControl
-                            mt={4}
-                            isInvalid={
-                              !!(form.errors.faculty && form.touched.faculty)
-                            }
-                          >
-                            <FormLabel htmlFor="faculty">Faculty</FormLabel>
-                            <Input
-                              variant={"filled"}
-                              {...field}
-                              id="faculty"
-                              placeholder="Enter faculty"
-                            />
-                            <Box mt={2} color="red.500" fontSize="sm">
-                              <ErrorMessage name="faculty" />
-                            </Box>
-                          </FormControl>
-                        )}
-                      </Field>
-
-                      <Field name="department">
-                        {({ field, form }: FieldProps) => (
-                          <FormControl
-                            mt={4}
-                            isInvalid={
-                              !!(
-                                form.errors.department &&
-                                form.touched.department
-                              )
-                            }
-                          >
-                            <FormLabel htmlFor="department">
-                              Department
-                            </FormLabel>
-                            <Input
-                              variant={"filled"}
-                              {...field}
-                              id="department"
-                              placeholder="Enter department"
-                            />
-                            <Box mt={2} color="red.500" fontSize="sm">
-                              <ErrorMessage name="department" />
                             </Box>
                           </FormControl>
                         )}
