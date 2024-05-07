@@ -31,16 +31,23 @@ export default function HowItWorks() {
         </Heading>
         <UnorderedList mt={6}>
           <ListItem color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
-            Sign up to create an account
+            Select sign up as a student
           </ListItem>
           <ListItem my={3} color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
-            Select “For students” at the top of the page
+            Provide the required details and create an account
           </ListItem>
           <ListItem color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
+            Select “For students” at the top of the page
+          </ListItem>
+          <ListItem color={"#9B9999"} mt={3} fontSize={"16px"} fontWeight={400}>
             Provide details of the kind of help you need
           </ListItem>
           <ListItem my={3} color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
             Attach payment advice or document to support your claim
+          </ListItem>
+          <ListItem my={3} color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
+            Attach a short video (maximum duration of 1 minute) for further
+            request verification
           </ListItem>
           <ListItem color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
             Click submit and your request will be posted for the community to
@@ -64,7 +71,8 @@ export default function HowItWorks() {
             Begin browsing, and provide help
           </ListItem>
           <ListItem my={3} color={"#9B9999"} fontSize={"16px"} fontWeight={400}>
-            Attach payment advice or document to support your claim
+            You can choose to provide funds to be disbursed by the AAS platform
+            or assist randomly
           </ListItem>
         </UnorderedList>
         Note: You can donate anonymously.
