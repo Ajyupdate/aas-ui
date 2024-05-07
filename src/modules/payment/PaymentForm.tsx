@@ -35,8 +35,8 @@ const PaymentForm = ({ amount }: PaymentFormProps) => {
       minH={{ md: "100vh", base: "100vh" }}
       align={"center"}
       justify={"center"}
-      // bg="blue.500"
-      bg="gray.50"
+      //  bg="blue.500"
+      // bg="gray.50"
     >
       <Stack
         spacing={8}
@@ -83,9 +83,10 @@ const PaymentForm = ({ amount }: PaymentFormProps) => {
                 </Box>
                 <Box px={{ base: 2, md: 4 }}>
                   <Button
+                    bg={"teal.500"}
                     type="submit"
                     width="full"
-                    className={`mt-4 bg-blue-500 w-full hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded`}
+                    className={`mt-4 bg-teal-500 w-full hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded`}
                     // disabled={isSubmitting}
                   >
                     Proceed

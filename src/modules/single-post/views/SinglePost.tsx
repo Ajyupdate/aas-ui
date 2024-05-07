@@ -1,4 +1,3 @@
-import { formatTimeAgo } from "@/components/formatTimeAgo";
 import Header from "@/modules/landing/components/Navbar";
 import { iPostsProps } from "@/types/Posts";
 import { iSchoolInfoProps } from "@/types/SchoolInfo";
@@ -128,9 +127,9 @@ export default function PostDetails() {
           {/* Apply rounded top corners to the first Box */}
           <VStack align="start" spacing={2} color="white">
             <Heading fontSize={"20px"} fontWeight={400}>
-              {post?.category}
+              School Fees
             </Heading>
-            d
+
             <Text fontSize={"16px"} mt={4} fontWeight={400}>
               2023/2024
             </Text>
@@ -145,7 +144,7 @@ export default function PostDetails() {
                 fontWeight={400}
                 color={"#727272"}
               >
-                {post?.student?.faculty}
+                Science
               </Tag>
               <Tag
                 ml={1}
@@ -158,7 +157,7 @@ export default function PostDetails() {
                 fontWeight={400}
                 color={"#727272"}
               >
-                {post?.student?.department}
+                Mathematics
               </Tag>
               <Tag
                 ml={1}
@@ -171,7 +170,7 @@ export default function PostDetails() {
                 fontWeight={400}
                 color={"#727272"}
               >
-                {post?.category}
+                School Fees
               </Tag>
             </Flex>
           </VStack>
@@ -179,8 +178,7 @@ export default function PostDetails() {
       </Flex>
 
       <Text my={8} mx={{ md: 20, base: 6 }} color={"#9B9999"}>
-        {post?.student?.first_name} {post?.student?.last_name} | Published{" "}
-        {post?.createdAt ? formatTimeAgo(post?.createdAt) : ""}
+        Ajibade Adetomiwa | Published 3 months ago
       </Text>
 
       <Heading
@@ -189,7 +187,7 @@ export default function PostDetails() {
         color={"#121212"}
         fontSize={"24px"}
       >
-        {post?.title}
+        Please I need help to pay for my first semester school fees
       </Heading>
 
       <Text
@@ -200,7 +198,14 @@ export default function PostDetails() {
         mr={{ md: "30%", base: 6 }}
         color={"#727272"}
       >
-        {post?.content}
+        Dear friends, alumni and community, I am reaching out with a humble
+        request for your support. I am in need of financial assistance to fund
+        my first semester school fees at the university of Lagos . Every
+        contribution, no matter the size, will make a significant impact on my
+        journey. Your generosity will not only help me achieve my educational
+        goals but also empower me to give back to the community in the future.
+        Thank you for considering and being a part of my educational journey.
+        Together, we can make dreams come true.
       </Text>
 
       <Box my={8} mx={{ md: 20, base: 6 }}>
