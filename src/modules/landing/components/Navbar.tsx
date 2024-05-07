@@ -83,10 +83,10 @@ const Header: React.FC = () => {
             color={"#9B9999"}
           >
             <Box display={{ md: "block", base: "none" }}>
-              <Link>How it works</Link>
+              <Link href="/how-it-works">How it works</Link>
             </Box>
             <Box display={{ md: "block", base: "none" }}>
-              <Link>Help</Link>
+              <Link href="/help">Help</Link>
             </Box>
             <Box display={{ md: "block", base: "none" }}>
               <Link href="/need-help">For Student</Link>
