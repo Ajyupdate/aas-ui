@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:3001/";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const BASE_URL = apiUrl;
 export const useAuth = () => {
   const token = "";
