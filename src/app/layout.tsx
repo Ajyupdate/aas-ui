@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import localFont from "next/font/local";
+import TanstackProvider from "../../providers/TanstackProvider";
 import "./globals.css";
 import { Providers } from "./provider";
 const myFont = localFont({
@@ -26,10 +27,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={myFont.className}>
         <Providers>
-          <Box bg={"#F7FAFC"}>
-            {children}
-            <Footer />
-          </Box>
+          <TanstackProvider>
+            <Box bg={"#F7FAFC"}>
+              {children}
+              <Footer />
+            </Box>
+          </TanstackProvider>
         </Providers>
       </body>
     </html>

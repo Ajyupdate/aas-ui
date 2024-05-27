@@ -1,3 +1,4 @@
+import { useAuth } from "@/api/hooks/useAuth";
 import { iPostsProps } from "@/types/Posts";
 import { SearchIcon } from "@chakra-ui/icons";
 import {
@@ -12,13 +13,14 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Header, { Jacques } from "../components/Navbar";
 import NeedHelp from "../components/NeedHelp";
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_URL;
 
 export default function LandingPage() {
+  const { client } = useAuth();
   const [posts, setPosts] = useState<iPostsProps[]>([]);
   const [error, setError] = useState(null);
   const [savedPostLength, setSavedPostLength] = useState();
@@ -28,21 +30,24 @@ export default function LandingPage() {
     setActiveTab(tabId);
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(`${API_ENDPOINT}/posts`);
-        console.log(response.data);
-        setPosts(response.data);
-
-        console.log(savedPostLength);
-      } catch (error) {
-        // setError(error.message);
-      }
-    };
-
-    fetchPosts();
-  }, []); //
+  const {
+    data: postsData,
+    isLoading: isUserLoading,
+    isError: getGroupError,
+  } = useQuery({
+    queryKey: ["allposts"],
+    queryFn: async () => {
+      return client
+        .get(`posts`, {})
+        .then((response) => {
+          setPosts(response.data);
+          return response.data;
+        })
+        .catch((error) => {
+          throw error;
+        });
+    },
+  });
 
   return (
     <Box pt={6}>
