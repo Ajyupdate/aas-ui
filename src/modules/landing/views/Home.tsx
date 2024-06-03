@@ -48,6 +48,7 @@ export default function LandingPage() {
         });
     },
   });
+  console.log(posts);
 
   return (
     <Box pt={6}>

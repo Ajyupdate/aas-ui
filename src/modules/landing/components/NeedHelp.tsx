@@ -1,3 +1,4 @@
+import { formatTimeAgo } from "@/components/formatTimeAgo";
 import { iPostsProps } from "@/types/Posts";
 import {
   Avatar,
@@ -38,476 +39,124 @@ export default function NeedHelp({ posts }: iNeedHelpProps) {
         mr={{ md: "10%", base: "unset" }}
         gap={12}
       >
-        {/* {posts?.map((post) => ( */}
-        <GridItem
-          w="100%"
-          cursor={"pointer"}
-          // key={post.post_id}
-          h="100%"
-          rounded="xl"
-        >
-          {" "}
-          {/* Apply rounded corners to the GridItem */}
-          <Link _hover={{ textDecoration: "none" }} href={`/posts/1`}>
-            <Flex flexDirection="column">
-              <Box bgColor="teal" p={4} pl={6} h="50%" roundedTop="xl">
-                {" "}
-                {/* Apply rounded top corners to the first Box */}
-                <VStack align="start" spacing={2} color="white">
-                  <Flex mb={4}>
-                    <Tag
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Science
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Mathematics
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      School Fees
-                    </Tag>
-                  </Flex>
-                  <Heading
-                    color="white"
-                    as="h1"
-                    fontSize="large"
-                    fontWeight="bold"
-                  >
-                    Please I need help to pay my first semester school Fees
-                  </Heading>
-                </VStack>
-              </Box>
-              <Box
-                width="100%"
-                py={2}
-                pl={6}
-                bg="white"
-                h="50%"
-                roundedBottom="xl"
-              >
-                {" "}
-                {/* Apply rounded bottom corners to the second Box */}
-                <VStack align="start" spacing={2}>
-                  <HStack
-                    spacing={2}
-                    align="center"
-                    justifyContent="space-between"
-                  >
-                    <HStack spacing={4} align="center">
-                      <Avatar
-                        height="50px"
-                        width="50px"
-                        name={"Ajibade Emmanuel"}
-                        src="https://bit.ly/dan-abramov"
-                        size="md"
-                      />
-                      <Text fontSize="18px" fontWeight={400}>
-                        Ajibade Emmanuel
-                      </Text>
-                    </HStack>
-                  </HStack>
-                  {/* <Divider color="gray" fontWeight="md" /> */}
-                  <p className="pr-8 line-clamp-3 leading-6 text-[16px] text-[#272727]">
-                    Dear friends, alumni and community, I am reaching out with a
-                    humble request for your support. I am in need of financial
-                    assistance to fund
-                  </p>
-                  <Flex justify="flex-end" mt={4}>
-                    <Box>
-                      <Text
+        {posts?.map((post) => (
+          <GridItem
+            w="100%"
+            cursor={"pointer"}
+            key={post.post_id}
+            h="100%"
+            rounded="xl"
+          >
+            {" "}
+            {/* Apply rounded corners to the GridItem */}
+            <Link _hover={{ textDecoration: "none" }} href={`/posts/1`}>
+              <Flex flexDirection="column">
+                <Box bgColor="teal" p={4} pl={6} h="50%" roundedTop="xl">
+                  {" "}
+                  {/* Apply rounded top corners to the first Box */}
+                  <VStack align="start" spacing={2} color="white">
+                    <Flex mb={4}>
+                      <Tag
+                        h="30px" // Height
+                        borderRadius="20px" // Border radius
+                        padding="5px 10px" // Padding
+                        gap="10px" // Gap between elements (for button group)
+                        size="sm"
                         fontSize={"14px"}
                         fontWeight={400}
-                        color={"#A1A1A1"}
                       >
-                        Read More
-                      </Text>
-                    </Box>
-                  </Flex>
-
-                  <Text fontSize="16px" fontWeight={400} color="[#9B9999]">
-                    Published 3 months ago
-                  </Text>
-                </VStack>
-              </Box>
-            </Flex>
-          </Link>
-        </GridItem>
-        <GridItem
-          w="100%"
-          cursor={"pointer"}
-          // key={post.post_id}
-          h="100%"
-          rounded="xl"
-        >
-          {" "}
-          {/* Apply rounded corners to the GridItem */}
-          <Link _hover={{ textDecoration: "none" }} href={`/posts/1`}>
-            <Flex flexDirection="column">
-              <Box bgColor="teal" p={4} pl={6} h="50%" roundedTop="xl">
-                {" "}
-                {/* Apply rounded top corners to the first Box */}
-                <VStack align="start" spacing={2} color="white">
-                  <Flex mb={4}>
-                    <Tag
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Science
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Mathematics
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      School Fees
-                    </Tag>
-                  </Flex>
-                  <Heading
-                    color="white"
-                    as="h1"
-                    fontSize="large"
-                    fontWeight="bold"
-                  >
-                    Please I need help to pay my first semester school Fees
-                  </Heading>
-                </VStack>
-              </Box>
-              <Box
-                width="100%"
-                py={2}
-                pl={6}
-                bg="white"
-                h="50%"
-                roundedBottom="xl"
-              >
-                {" "}
-                {/* Apply rounded bottom corners to the second Box */}
-                <VStack align="start" spacing={2}>
-                  <HStack
-                    spacing={2}
-                    align="center"
-                    justifyContent="space-between"
-                  >
-                    <HStack spacing={4} align="center">
-                      <Avatar
-                        height="50px"
-                        width="50px"
-                        name={"Ajibade Emmanuel"}
-                        src="https://bit.ly/dan-abramov"
-                        size="md"
-                      />
-                      <Text fontSize="18px" fontWeight={400}>
-                        Ajibade Emmanuel
-                      </Text>
-                    </HStack>
-                  </HStack>
-                  {/* <Divider color="gray" fontWeight="md" /> */}
-                  <p className="pr-8 line-clamp-3 leading-6 text-[16px] text-[#272727]">
-                    Dear friends, alumni and community, I am reaching out with a
-                    humble request for your support. I am in need of financial
-                    assistance to fund
-                  </p>
-                  <Flex justify="flex-end" mt={4}>
-                    <Box>
-                      <Text
+                        {post.student?.faculty}
+                      </Tag>
+                      <Tag
+                        ml={1}
+                        h="30px" // Height
+                        borderRadius="20px" // Border radius
+                        padding="5px 10px" // Padding
+                        gap="10px" // Gap between elements (for button group)
+                        size="sm"
                         fontSize={"14px"}
                         fontWeight={400}
-                        color={"#A1A1A1"}
                       >
-                        Read More
-                      </Text>
-                    </Box>
-                  </Flex>
-
-                  <Text fontSize="16px" fontWeight={400} color="[#9B9999]">
-                    Published 3 months ago
-                  </Text>
-                </VStack>
-              </Box>
-            </Flex>
-          </Link>
-        </GridItem>
-        <GridItem
-          w="100%"
-          cursor={"pointer"}
-          // key={post.post_id}
-          h="100%"
-          rounded="xl"
-        >
-          {" "}
-          {/* Apply rounded corners to the GridItem */}
-          <Link _hover={{ textDecoration: "none" }} href={`/posts/1`}>
-            <Flex flexDirection="column">
-              <Box bgColor="teal" p={4} pl={6} h="50%" roundedTop="xl">
-                {" "}
-                {/* Apply rounded top corners to the first Box */}
-                <VStack align="start" spacing={2} color="white">
-                  <Flex mb={4}>
-                    <Tag
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Science
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      Mathematics
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      School Fees
-                    </Tag>
-                  </Flex>
-                  <Heading
-                    color="white"
-                    as="h1"
-                    fontSize="large"
-                    fontWeight="bold"
-                  >
-                    Please I need help to pay my first semester school Fees
-                  </Heading>
-                </VStack>
-              </Box>
-              <Box
-                width="100%"
-                py={2}
-                pl={6}
-                bg="white"
-                h="50%"
-                roundedBottom="xl"
-              >
-                {" "}
-                {/* Apply rounded bottom corners to the second Box */}
-                <VStack align="start" spacing={2}>
-                  <HStack
-                    spacing={2}
-                    align="center"
-                    justifyContent="space-between"
-                  >
-                    <HStack spacing={4} align="center">
-                      <Avatar
-                        height="50px"
-                        width="50px"
-                        name={"Ajibade Emmanuel"}
-                        src="https://bit.ly/dan-abramov"
-                        size="md"
-                      />
-                      <Text fontSize="18px" fontWeight={400}>
-                        Ajibade Emmanuel
-                      </Text>
-                    </HStack>
-                  </HStack>
-                  {/* <Divider color="gray" fontWeight="md" /> */}
-                  <p className="pr-8 line-clamp-3 leading-6 text-[16px] text-[#272727]">
-                    Dear friends, alumni and community, I am reaching out with a
-                    humble request for your support. I am in need of financial
-                    assistance to fund
-                  </p>
-                  <Flex justify="flex-end" mt={4}>
-                    <Box>
-                      <Text
+                        {post.student?.department}
+                      </Tag>
+                      <Tag
+                        ml={1}
+                        h="30px" // Height
+                        borderRadius="20px" // Border radius
+                        padding="5px 10px" // Padding
+                        gap="10px" // Gap between elements (for button group)
+                        size="sm"
                         fontSize={"14px"}
                         fontWeight={400}
-                        color={"#A1A1A1"}
                       >
-                        Read More
-                      </Text>
-                    </Box>
-                  </Flex>
-
-                  <Text fontSize="16px" fontWeight={400} color="[#9B9999]">
-                    Published 3 months ago
-                  </Text>
-                </VStack>
-              </Box>
-            </Flex>
-          </Link>
-        </GridItem>
-        <GridItem
-          w="100%"
-          cursor={"pointer"}
-          // key={post.post_id}
-          h="100%"
-          rounded="xl"
-        >
-          {" "}
-          {/* Apply rounded corners to the GridItem */}
-          <Link _hover={{ textDecoration: "none" }} href={`/posts/1`}>
-            <Flex flexDirection="column">
-              <Box bgColor="teal" p={4} pl={6} h="50%" roundedTop="xl">
-                {" "}
-                {/* Apply rounded top corners to the first Box */}
-                <VStack align="start" spacing={2} color="white">
-                  <Flex mb={4}>
-                    <Tag
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
+                        {post.category}
+                      </Tag>
+                    </Flex>
+                    <Heading
+                      color="white"
+                      as="h1"
+                      fontSize="large"
+                      fontWeight="bold"
                     >
-                      Science
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
+                      {post.title}
+                    </Heading>
+                  </VStack>
+                </Box>
+                <Box
+                  width="100%"
+                  py={2}
+                  pl={6}
+                  bg="white"
+                  h="50%"
+                  roundedBottom="xl"
+                >
+                  {" "}
+                  {/* Apply rounded bottom corners to the second Box */}
+                  <VStack align="start" spacing={2}>
+                    <HStack
+                      spacing={2}
+                      align="center"
+                      justifyContent="space-between"
                     >
-                      Mathematics
-                    </Tag>
-                    <Tag
-                      ml={1}
-                      h="30px" // Height
-                      borderRadius="20px" // Border radius
-                      padding="5px 10px" // Padding
-                      gap="10px" // Gap between elements (for button group)
-                      size="sm"
-                      fontSize={"14px"}
-                      fontWeight={400}
-                    >
-                      School Fees
-                    </Tag>
-                  </Flex>
-                  <Heading
-                    color="white"
-                    as="h1"
-                    fontSize="large"
-                    fontWeight="bold"
-                  >
-                    Please I need help to pay my first semester school Fees
-                  </Heading>
-                </VStack>
-              </Box>
-              <Box
-                width="100%"
-                py={2}
-                pl={6}
-                bg="white"
-                h="50%"
-                roundedBottom="xl"
-              >
-                {" "}
-                {/* Apply rounded bottom corners to the second Box */}
-                <VStack align="start" spacing={2}>
-                  <HStack
-                    spacing={2}
-                    align="center"
-                    justifyContent="space-between"
-                  >
-                    <HStack spacing={4} align="center">
-                      <Avatar
-                        height="50px"
-                        width="50px"
-                        name={"Ajibade Emmanuel"}
-                        src="https://bit.ly/dan-abramov"
-                        size="md"
-                      />
-                      <Text fontSize="18px" fontWeight={400}>
-                        Ajibade Emmanuel
-                      </Text>
+                      <HStack spacing={4} align="center">
+                        <Avatar
+                          height="50px"
+                          width="50px"
+                          name={"Ajibade Emmanuel"}
+                          src="https://bit.ly/dan-abramov"
+                          size="md"
+                        />
+                        <Text fontSize="18px" fontWeight={400}>
+                          {post.student?.first_name} {post.student?.last_name}
+                        </Text>
+                      </HStack>
                     </HStack>
-                  </HStack>
-                  {/* <Divider color="gray" fontWeight="md" /> */}
-                  <p className="pr-8 line-clamp-3 leading-6 text-[16px] text-[#272727]">
-                    Dear friends, alumni and community, I am reaching out with a
-                    humble request for your support. I am in need of financial
-                    assistance to fund
-                  </p>
-                  <Flex justify="flex-end" mt={4}>
-                    <Box>
-                      <Text
-                        fontSize={"14px"}
-                        fontWeight={400}
-                        color={"#A1A1A1"}
-                      >
-                        Read More
-                      </Text>
-                    </Box>
-                  </Flex>
+                    {/* <Divider color="gray" fontWeight="md" /> */}
+                    <p className="pr-8 line-clamp-3 leading-6 text-[16px] text-[#272727]">
+                      {post.content}
+                    </p>
+                    <Flex justify="flex-end" mt={4}>
+                      <Box>
+                        <Text
+                          fontSize={"14px"}
+                          fontWeight={400}
+                          color={"#A1A1A1"}
+                        >
+                          Read More
+                        </Text>
+                      </Box>
+                    </Flex>
 
-                  <Text fontSize="16px" fontWeight={400} color="[#9B9999]">
-                    Published 3 months ago
-                  </Text>
-                </VStack>
-              </Box>
-            </Flex>
-          </Link>
-        </GridItem>
-        {/* ))} */}
+                    <Text fontSize="16px" fontWeight={400} color="[#9B9999]">
+                      Published{" "}
+                      {post.createdAt && formatTimeAgo(post?.createdAt)}
+                    </Text>
+                  </VStack>
+                </Box>
+              </Flex>
+            </Link>
+          </GridItem>
+        ))}
       </Grid>
       <Center mr={{ md: "10%", base: "0" }} mt={8}>
         <Button
