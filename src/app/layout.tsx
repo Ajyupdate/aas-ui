@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
-import Footer from "@/components/Footer";
 import localFont from "next/font/local";
 import TanstackProvider from "../../providers/TanstackProvider";
 import "./globals.css";
@@ -30,7 +29,7 @@ export default function RootLayout({
           <TanstackProvider>
             <Box bg={"#F7FAFC"}>
               {children}
-              <Footer />
+              {/* <Footer /> */}
             </Box>
           </TanstackProvider>
         </Providers>
